@@ -11,6 +11,8 @@ import com.company.location.model.response.SmsLocationResponse;
 import com.company.msg.ObjectRestResponse;
 import junit.framework.TestCase;
 
+import java.util.Date;
+
 public class LocationServiceTest extends TestCase {
 
     private LocationService locationService;
@@ -31,11 +33,11 @@ public class LocationServiceTest extends TestCase {
     public void testRegisterDriver() throws Exception {
         RegisterDriverRequest driver = new RegisterDriverRequest();
         driver.setClientId(clientId);
-        driver.setTimestamp("15747545455");
+        driver.setTimestamp(String.valueOf(new Date().getTime()));
         driver.setDriverName("test");
         driver.setIdentityCard("1111111111244545");
         driver.setLdrivingLicense("43545766878");
-        driver.setPhone("15210802181");
+        driver.setPhone("15210802134");
         driver.setPlateNum("鄂A8936");
         driver.makeMd5Signature(secret);
         ObjectRestResponse<AuthRegResponse> response = locationService.registerDriver(driver);
@@ -50,8 +52,8 @@ public class LocationServiceTest extends TestCase {
     public void testQueryAuthReg() throws Exception {
         PhoneLocationRequest request = new PhoneLocationRequest();
         request.setClientId(clientId);
-        request.setTimestamp("15747545455");
-        request.setPhone("15210802181");
+        request.setTimestamp(String.valueOf(new Date().getTime()));
+        request.setPhone("15210802134");
         request.makeMd5Signature(secret);
         ObjectRestResponse<AuthRegQueryResponse> response = locationService.queryAuthReg(request);
         System.out.println(JSONObject.toJSONString(response));
@@ -65,8 +67,8 @@ public class LocationServiceTest extends TestCase {
     public void testSmsLocation() throws Exception {
         PhoneLocationRequest request = new PhoneLocationRequest();
         request.setClientId(clientId);
-        request.setTimestamp("15747545455");
-        request.setPhone("15210802181");
+        request.setTimestamp(String.valueOf(new Date().getTime()));
+        request.setPhone("15210802134");
         request.makeMd5Signature(secret);
         ObjectRestResponse<SmsLocationResponse> response = locationService.smsLocation(request);
         System.out.println(JSONObject.toJSONString(response));
@@ -81,7 +83,7 @@ public class LocationServiceTest extends TestCase {
         PlatenumRequest request = new PlatenumRequest();
         request.setPlatenum("黑F88739");
         request.setClientId(clientId);
-        request.setTimestamp("15747545455");
+        request.setTimestamp(String.valueOf(new Date().getTime()));
         request.makeMd5Signature(secret);
         ObjectRestResponse<PlatenumLocation> response = locationService.platenumLocation(request);
         System.out.println(JSONObject.toJSONString(response));
